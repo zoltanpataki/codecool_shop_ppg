@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="copy">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/"><img src="/img/ppg_logo.png" alt="logo" width="215px" /></a>
+                <!--<a class="navbar-brand page-scroll" href="/">Powerpuff Shop</a>-->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div th:if="${isLoggedIn == false}" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden active">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="">
+                        <a th:text="${amount}" href="/cart" class="page-scroll fa fa-shopping-cart fa-lg"></a>
+                    </li>
+                    <li class="">
+                        <a href="/registration_page">Register</a>
+                    </li>
+                    <li class="">
+                        <a href="/login_page">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${isLoggedIn == true}" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden active">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="">
+                        <a th:text="${amount}" href="/cart" class="page-scroll fa fa-shopping-cart fa-lg"></a>
+                    </li>
+                    <li class="">
+                        <a th:text="Hello + ' ' + ${username}"></a>
+                    </li>
+                    <li class="">
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorator="product/index"
+      xmlns:layout="http://www.w3.org/1999/xhtml">>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div layout:fragment="templates/index" class="container">
+    <div class="well well-sm">
+        <!--/*@thymesVar id="category" type="Main"*/-->
+        <strong th:text="${name.name}">Category Title</strong>
+    </div>
+    <div class="filter">
+        <form method="get" action="/category">
+            <label for="category">Filter by category: </label>
+            <select id="category" name="category">
+                <option th:each="cat : ${allCategories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}"></option>
+            </select>
+            <input type="submit" value="OK"/>
+        </form>
+    </div>
+    <div class="filter">
+        <form method="get" action="/supplier">
+            <label for="supplier">Filter by supplier: </label>
+            <select id="supplier" name="supplier">
+                <option th:each="sup : ${allSuppliers}"
+                        th:value="${sup.id}"
+                        th:text="${sup.name}"></option>
+            </select>
+            <input type="submit" value="OK"/>
+        </form>
+    </div>
+
+    <div id="products" class="row list-group">
+
+        <div class="item col-xs-4 col-lg-3" th:each="prod,iterStat : ${products}">
+            <div class="thumbnail">
+                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <div class="caption">
+                    <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
+                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="quantity">
+                        </div>
+                        <form method="post" action="/addToCart">
+                            <input name="quantity" class="quantity" min="0" type="number" />
+                            <input type="hidden"  name="productId" th:value="${prod.id}"  />
+                            <button class="btn btn-success" type="submit">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
